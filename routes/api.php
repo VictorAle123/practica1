@@ -25,20 +25,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //PUt actualizar
 
 
+//Productos
+
 Route::get("/productos/{id?}","API\productosController@index")->where("id","[0-9]+");
-
-Route::get("/comentarios/{id?}","API\ComentariosController@index")->where("id","[0-9]+");
-
 
 Route::post("/productos","Api\productosController@guardar");
 
-Route::post("/productos","Api\productosController@eliminar");
+Route::delete("/productos/{id}","API\productosController@eliminar")->where("id","[0-9]+");
+
+Route::put("/productos/{id}","API\productosController@modificar")->where("id","[0-9]+");
 
 
 
+//comentarios
 
-
+Route::get("/comentarios/{id?}","API\ComentariosController@index")->where("id","[0-9]+");
 
 Route::post("/comentarios","Api\ComentariosController@guardar");
 
+Route::delete("/comentarios/{id}","API\ComentariosController@eliminar")->where("id","[0-9]+");
 
+Route::put("/comentarios/{id}","API\ComentariosController@modificar")->where("id","[0-9]+");

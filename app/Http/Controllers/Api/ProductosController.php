@@ -24,6 +24,7 @@ class ProductosController extends Controller
         $productos = new productosmodelo();
         $productos->Nombre = $request->Nombre;
 
+
         if($productos->save())
 
         return response()->json(["productos"=>$productos],201);
@@ -35,23 +36,36 @@ class ProductosController extends Controller
     {
 
 
-        productosmodelo::delete($id);
-        return response()->json(["productos"=>productosmodelo::all()],200);
+    
+            $productos = productosmodelo::find($id);
+    
+    
+            if($productos->delete()) {
+                return response()->json(["productos"=>productosmodelo::all()],200);
+    
+
+    }
+}
 
 
-
-        $borrar = new productosmodelo();
-
-        $borrar = productosmodelo::find($id);
-        $borrar-> delete();
-        return response()->json(["productos"=>productosmodelo::all()],200);
+    public function modificar (Request $request, $id) {
 
 
+        $productos = new productosmodelo();
+        $productos = productosmodelo::find($id);
+
+        $productos->Nombre = $request->Nombre;
 
 
+        if($productos->update()){
+
+            
+        return response()->json(["productos"=>$productos],201);
+
+        }
 
 
     }
 
+    }
     //
-}

@@ -44,6 +44,46 @@ class ComentariosController extends Controller
     }
 
 
+    public function eliminar($id)
+    {
+
+
+    
+            $comentarios = comentariosmodelo::find($id);
+    
+    
+            if($comentarios->delete()) {
+                return response()->json(["comentarios"=>comentariosmodelo::all()],200);
+    
+
+    }
+
+
+}
+
+
+public function modificar (Request $request, $id) {
+
+    $comentarios = new comentariosmodelo();
+    $comentarios = comentariosmodelo::find($id);
+
+    $comentarios->comentario = $request->comentario;
+
+    $comentarios->persona = $request->persona;
+
+    $comentarios->producto = $request->producto;
+
+
+
+
+    if($comentarios->update()){
+
+    return response()->json(["productos"=>$comentarios],201);
+
+    }
+
+
+}
 
     //
 }
